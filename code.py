@@ -13,7 +13,7 @@ def create_features_df(df):
             'IRTRNFY', 'IRSTMFY', 'IRSEDFY', 'IRCIGFM',
             'CIGYR', 'CGRYR', 'SNFYR', 'ALCYR', 'CRKYR', 'SUMYR',
             'IRCIGAGE', 'IRCGRAGE', 'IRSNFAGE', 'IRALCAGE', 'IRCRKAGE', 'SUMAGE',
-            'DEPNDMRJ', 'DPILLALC', 'ABODILAL', 'TOBFLAG', 'SNFFLAG', 'ALCFLAG', 'CRKFLAG', 'SUMFLAG'
+            'DEPNDMRJ', 'DPILLALC', 'ABODILAL', 'TOBFLAG', 'SNFFLAG', 'ALCFLAG', 'CRKFLAG', 'SUMFLAG',
             'EDUCCAT2', 'NEWRACE2', 'CATAG2', 'IRSEX', 'INCOME']]
     return X
 
