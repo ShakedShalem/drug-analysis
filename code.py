@@ -14,7 +14,7 @@ def create_features_df(df):
             'CIGYR', 'CGRYR', 'SNFYR', 'ALCYR', 'CRKYR', 'SUMYR',
             'IRCIGAGE', 'IRCGRAGE', 'IRSNFAGE', 'IRALCAGE', 'IRCRKAGE', 'SUMAGE',
             'DEPNDMRJ', 'DPILLALC', 'ABODILAL', 'TOBFLAG', 'SNFFLAG', 'ALCFLAG', 'CRKFLAG', 'SUMFLAG',
-            'EDUCCAT2', 'CATAG6', 'IRSEX', 'INCOME']]
+            'EDUCCAT2', 'CATAG6', 'IRSEX', 'INCOME', 'NEWRACE2']]
     return X
 
 
@@ -42,14 +42,30 @@ def clean_data(X, y):
 X = create_features_df(df)
 y = create_target(df)
 X, y = clean_data(X, y)
+
+
+# reduce_X = df[['IRALCFY', 'IRALCAGE', 'IRCIGAGE', 'SUMAGE', 'IRCGRAGE', 'EDUCCAT2',
+#               'IRMJFY', 'INCOME', 'IRCIGFM', 'CATAG6', 'IRANLFY', 'IRTRNFY',
+#               'IRSNFAGE', 'IRHALFY', 'IRSTMFY', 'DPILLALC', 'IRCOCFY', 'IRSEX',
+#               'IRINHFY', 'ABODILAL', 'CIGYR', 'IRCRKAGE', 'CGRYR', 'IRSEDFY']]
+
 # Change values of 991 and 993 on frequency of use
 freq_cols = ['IRALCFY', 'IRMJFY', 'IRCOCFY', 'IRCRKFY', 'IRHERFY', 'IRHALFY', 'IRINHFY', 'IRANLFY',
-             'IRTRNFY', 'IRSTMFY', 'IRSEDFY', 'IRCIGFM', ]
+             'IRTRNFY', 'IRSTMFY', 'IRSEDFY', 'IRCIGFM']
+
+# freq_cols = ['IRALCFY', 'IRMJFY', 'IRCOCFY', 'IRHALFY', 'IRINHFY', 'IRANLFY',
+#             'IRTRNFY', 'IRSTMFY', 'IRSEDFY', 'IRCIGFM']
 
 for col in freq_cols:
     X[col].replace(to_replace=[991, 993], value=[-2, -1], inplace=True)
 
+# Dummies the Race feature
+race_columns = pd.get_dummies(X.NEWRACE2).iloc[:, 1:]
 
-X.to_pickle('feature_df.pkl')
-y.to_pickle('target.pkl')
-if __name__ == '__main__':
+X[race_columns.columns] = race_columns
+
+#reduce_X, y = clean_data(reduce_X, y)
+
+# X.to_pickle('feature_df.pkl')
+# y.to_pickle('target.pkl')
+# reduce_X.to_pickle('reduce_x.pkl')
