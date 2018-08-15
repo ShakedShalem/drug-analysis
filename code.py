@@ -39,10 +39,16 @@ def clean_data(X, y):
     return X, y
 
 
-X = create_features_df(df)
-y = create_target(df)
-X, y = clean_data(X, y)
+#X = create_features_df(df)
+#y = create_target(df)
+#X, y = clean_data(X, y)
 
+new_X = df[['IRALCFY', 'IRMJFY', 'IRCOCFY', 'IRCRKFY', 'IRHERFY', 'IRHALFY', 'IRINHFY', 'IRANLFY',
+            'IRTRNFY', 'IRSTMFY', 'IRSEDFY', 'IRCIGFM',
+            'CIGYR', 'CGRYR', 'SNFYR', 'ALCYR', 'CRKYR', 'SUMYR',
+            'IRCIGAGE', 'IRCGRAGE', 'IRSNFAGE', 'IRALCAGE', 'IRCRKAGE', 'SUMAGE',
+            'DEPNDMRJ', 'DPILLALC', 'ABODILAL', 'TOBFLAG', 'SNFFLAG', 'ALCFLAG', 'CRKFLAG', 'SUMFLAG',
+            'EDUCCAT2', 'CATAG6', 'IRSEX', 'INCOME', 'NEWRACE2']]
 
 # reduce_X = df[['IRALCFY', 'IRALCAGE', 'IRCIGAGE', 'SUMAGE', 'IRCGRAGE', 'EDUCCAT2',
 #               'IRMJFY', 'INCOME', 'IRCIGFM', 'CATAG6', 'IRANLFY', 'IRTRNFY',
@@ -56,13 +62,13 @@ freq_cols = ['IRALCFY', 'IRMJFY', 'IRCOCFY', 'IRCRKFY', 'IRHERFY', 'IRHALFY', 'I
 # freq_cols = ['IRALCFY', 'IRMJFY', 'IRCOCFY', 'IRHALFY', 'IRINHFY', 'IRANLFY',
 #             'IRTRNFY', 'IRSTMFY', 'IRSEDFY', 'IRCIGFM']
 
-for col in freq_cols:
-    X[col].replace(to_replace=[991, 993], value=[-2, -1], inplace=True)
+# for col in freq_cols:
+#    X[col].replace(to_replace=[991, 993], value=[-2, -1], inplace=True)
 
 # Dummies the Race feature
-race_columns = pd.get_dummies(X.NEWRACE2).iloc[:, 1:]
+#race_columns = pd.get_dummies(X.NEWRACE2).iloc[:, 1:]
 
-X[race_columns.columns] = race_columns
+#X[race_columns.columns] = race_columns
 
 #reduce_X, y = clean_data(reduce_X, y)
 
